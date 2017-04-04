@@ -21,29 +21,14 @@ enum EchoLabelPositionType {
     case Right
 }
 
-class NRLabel : UILabel {
-    public var textInsets = UIEdgeInsets.zero {
-        didSet { invalidateIntrinsicContentSize() }
-    }
-    
-    override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, textInsets))
-    }
-}
-
 class EchoPriceTagLabelView: UIView {
     
     private var currencyLabel: UILabel?
-    private var integerLabel: NRLabel?
+    private var integerLabel: UILabel?
     private var decimalPointLabel: UILabel?
     private var decimalLabel: UILabel?
     
-    private let ratio: [CGFloat] = [0.2, 0.4, 0.1, 0.2]
     private let smallLabelRatio = CGFloat(1.0 / 3)
-    
-    class func instanceFromNib() -> UIView {
-        return UINib(nibName: "PriceTagLabel", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
-    }
     
     public func setPrice(price: Float,
                          currency: String = "$",
@@ -54,7 +39,7 @@ class EchoPriceTagLabelView: UIView {
         
         let dividedPrice = self.getDividedPrice(price: price)
         
-        self.integerLabel = NRLabel(frame: self.frame)
+        self.integerLabel = UILabel(frame: self.frame)
         self.addSubview(self.integerLabel!)
         let fontName = "HelveticaNeue-UltraLight"
         let font = UIFont(name: fontName, size: self.frame.size.height)
@@ -67,12 +52,6 @@ class EchoPriceTagLabelView: UIView {
         let fontsize = self.integerLabel!.font.pointSize
         let adjust = (self.integerLabel!.frame.size.height - fontsize) * 2
         self.integerLabel!.frame.size.height -= adjust
-        
-//        self.integerLabel!.contentMode
-        
-//        self.integerLabel!.layer.borderColor = UIColor.red.cgColor
-//        self.integerLabel!.layer.borderWidth = 1
-
         
         self.currencyLabel = self.createLable(positionType: .Left,
                                               heightRatio: self.smallLabelRatio,
@@ -121,7 +100,6 @@ class EchoPriceTagLabelView: UIView {
         let fontSize = height
         let fontName = italic ? "HelveticaNeue-UltraLightItalic" : "HelveticaNeue-UltraLight"
         
-        //创建富文本
         let myAttribute = [ NSForegroundColorAttributeName: UIColor.black,
                             NSFontAttributeName: UIFont(name: fontName, size: fontSize)!] as [String : Any]
         let attrString = NSMutableAttributedString(string: text, attributes: myAttribute)
@@ -161,9 +139,6 @@ class EchoPriceTagLabelView: UIView {
         }
 
         label.frame.origin.y = refY
-        
-//        label.layer.borderColor = UIColor.red.cgColor
-//        label.layer.borderWidth = 1
         
         return label
     }
