@@ -27,6 +27,12 @@ class EchoPriceTagLabelView: UIView {
     private var integerLabel: UILabel?
     private var decimalPointLabel: UILabel?
     private var decimalLabel: UILabel?
+    private var components: [UILabel?] = []
+    
+    var currencyLabelTextColor: UIColor = UIColor.black
+    var integerLabelTextColor: UIColor = UIColor.black
+    var decimalPointLabelTextColor: UIColor = UIColor.black
+    var decimalLabelTextColor: UIColor = UIColor.black
     
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
@@ -39,19 +45,7 @@ class EchoPriceTagLabelView: UIView {
         
         let dividedPrice = self.getDividedPrice(price: price)
         
-        self.integerLabel = UILabel(frame: self.frame)
-        self.addSubview(self.integerLabel!)
-        let fontName = "HelveticaNeue-UltraLight"
-        let font = UIFont(name: fontName, size: self.frame.size.height)
-        self.integerLabel!.font = font
-        self.integerLabel!.textColor = UIColor.blue
-        self.integerLabel!.text = String(dividedPrice.integerPart)
-        self.integerLabel!.sizeToFit()
-        self.integerLabel!.frame.origin = CGPoint(x: 0, y: 0)
-        
-        let fontsize = self.integerLabel!.font.pointSize
-        let adjust = (self.integerLabel!.frame.size.height - fontsize) * 2
-        self.integerLabel!.frame.size.height -= adjust
+        self.createMainPriceLabel(mainPrice: dividedPrice.integerPart)
         
         self.currencyLabel = self.createLable(positionType: .Left,
                                               heightRatio: self.smallLabelRatio,
@@ -78,6 +72,48 @@ class EchoPriceTagLabelView: UIView {
                                                 underline: true,
                                                    italic: true)
         self.addSubview(self.decimalLabel!)
+        
+        self.reshape()
+    }
+    
+    private func reshape() {
+        self.components = [self.currencyLabel,
+                           self.integerLabel,
+                           self.decimalPointLabel,
+                           self.decimalLabel]
+        let transform = CGAffineTransform(translationX: self.currencyLabel!.frame.width, y: 0)
+        _ = self.components.map{$0!.transform = transform}
+        
+        let totalWidth = self.components.reduce(0){$0 + $1!.frame.size.width}
+        self.frame.size.width = totalWidth
+    }
+    
+    private func createMainPriceLabel(mainPrice: Int) {
+        let fontName = "HelveticaNeue-UltraLight"
+        self.integerLabel = self.createMainPriceLabel(frame: self.frame,
+                                                      text: String(mainPrice),
+                                                      textColor: self.integerLabelTextColor,
+                                                      fontName: fontName)
+        self.addSubview(self.integerLabel!)
+        self.integerLabel!.frame.origin = CGPoint(x: 0, y: 0)
+        self.frame.size.height = self.integerLabel!.frame.size.height        
+    }
+    
+    private func createMainPriceLabel(frame: CGRect,
+                                      text: String,
+                                      textColor: UIColor,
+                                      fontName: String) -> UILabel {
+        let label = UILabel(frame: frame)
+        label.font = UIFont(name: fontName, size: frame.size.height)
+        label.textColor = textColor
+        label.text = text
+        label.sizeToFit()
+        
+        let fontsize = label.font.pointSize
+        let adjust = (label.frame.size.height - fontsize) * 2
+        label.frame.size.height -= adjust
+        
+        return label
     }
     
     private func createLable(positionType: EchoLabelPositionType,
