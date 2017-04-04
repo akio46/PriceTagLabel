@@ -27,7 +27,7 @@ class PriceTagLabelExampleTests: XCTestCase {
     }
     
     func testSplitPrice() {
-        let label = EchoPriceTagLabelView()
+        let label = EchoPriceTagLabelView(x:0, y:0, height:100)
         var result = label.getDividedPrice(price: 10.123)
         XCTAssertEqual(result.integerPart, 10)
         XCTAssertEqual(result.decimalPart, 12)

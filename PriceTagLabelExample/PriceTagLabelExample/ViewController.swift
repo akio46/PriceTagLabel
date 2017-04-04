@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         let lableHeight: CGFloat = 100
         let tagView = EchoPriceTagLabelView(x: 50, y: 40, height: lableHeight)
         _ = tagView.setPrice(price: 100.11, currencyShowMode:.SUBSCRIPT)
+        tagView.currencyLabelTextColor = UIColor.red
         
         let tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
         _ = tagView1.setPrice(price: 100.11, currencyShowMode:.SUPERSCRIPT)
