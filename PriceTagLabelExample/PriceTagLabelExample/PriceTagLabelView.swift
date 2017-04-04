@@ -36,12 +36,19 @@ class EchoPriceTagLabelView: UIView {
     
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
+    init(x: CGFloat, y: CGFloat, height: CGFloat) {
+        super.init(frame:CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
+    }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
+    
     public func setPrice(price: Float,
                          currency: String = "$",
                          decimalPoint: String = ".",
                          currencyShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT,
                          decimalPointShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT,
-                         decimalsShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT) {
+                         decimalsShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT
+        ) -> CGFloat {
         
         let dividedPrice = self.getDividedPrice(price: price)
         
@@ -74,6 +81,8 @@ class EchoPriceTagLabelView: UIView {
         self.addSubview(self.decimalLabel!)
         
         self.reshape()
+        
+        return self.frame.width
     }
     
     private func reshape() {

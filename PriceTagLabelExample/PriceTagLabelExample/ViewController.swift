@@ -13,19 +13,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let lableHeight = 100
-        let tagView = EchoPriceTagLabelView(frame: CGRect(x: 50, y: 40, width: 800, height: lableHeight / 2))
-        tagView.setPrice(price: 100.11, currencyShowMode:.SUBSCRIPT)
+        let lableHeight: CGFloat = 100
+        let tagView = EchoPriceTagLabelView(x: 50, y: 40, height: lableHeight)
+        _ = tagView.setPrice(price: 100.11, currencyShowMode:.SUBSCRIPT)
         
-        let tagView1 = EchoPriceTagLabelView(frame: CGRect(x: 50, y: 240, width: 800, height: lableHeight))
-        tagView1.setPrice(price: 100.11, currencyShowMode:.SUPERSCRIPT)
+        let tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
+        _ = tagView1.setPrice(price: 100.11, currencyShowMode:.SUPERSCRIPT)
         tagView1.backgroundColor = UIColor.gray
         
-        let tagView2 = EchoPriceTagLabelView(frame: CGRect(x: 50, y: 440, width: 800, height: lableHeight))
-        tagView2.setPrice(price: 100.11,
+        let tagView2 = EchoPriceTagLabelView(x: 50, y: 440, height: lableHeight)
+        let width = tagView2.setPrice(price: 100.11,
                           currencyShowMode:.SUPERSCRIPT,
                           decimalPointShowMode: .SUBSCRIPT,
                           decimalsShowMode:.SUBSCRIPT)
+        debugPrint(width)
                 
         self.view.addSubview(tagView)
         self.view.addSubview(tagView1)
