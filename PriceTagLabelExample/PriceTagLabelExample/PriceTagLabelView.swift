@@ -23,10 +23,10 @@ enum EchoLabelPositionType {
 
 class EchoPriceTagLabelView: UIView {
     
-    private let basicFontName = "HelveticaNeue-UltraLight"
-    private let italicFontName = "HelveticaNeue-UltraLightItalic"
-    private let boldFontName = "HelveticaNeue-Bold"
-    private let boldItalicFontName = "HelveticaNeue-BoldItalic"
+    public let basicFontName = "HelveticaNeue-UltraLight"
+    public let italicFontName = "HelveticaNeue-UltraLightItalic"
+    public let boldFontName = "HelveticaNeue-Bold"
+    public let boldItalicFontName = "HelveticaNeue-BoldItalic"
     
     private var currencyLabel: UILabel?
     private var integerLabel: UILabel?
@@ -227,6 +227,13 @@ class EchoPriceTagLabelView: UIView {
         label.frame.origin.y = refY
         
         return label
+    }
+    
+    internal func getFontName(italic: Bool, bold: Bool) -> String {
+        let fonts = [basicFontName, italicFontName, boldFontName, boldItalicFontName]
+        let index = (italic ? 0b01 : 0) + (bold ? 0b10 : 0)
+        
+        return fonts[index]
     }
     
     internal func getDividedPrice(price: Float) -> (integerPart: Int, decimalPart: Int) {

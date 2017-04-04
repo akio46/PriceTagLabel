@@ -26,6 +26,14 @@ class PriceTagLabelExampleTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testFontName() {
+        let label = EchoPriceTagLabelView(x:0, y:0, height:100)
+        XCTAssertEqual(label.italicFontName, label.getFontName(italic: true, bold: false))
+        XCTAssertEqual(label.boldFontName, label.getFontName(italic: false, bold: true))
+        XCTAssertEqual(label.boldItalicFontName, label.getFontName(italic: true, bold: true))
+        XCTAssertEqual(label.basicFontName, label.getFontName(italic: false, bold: false))
+    }
+    
     func testSplitPrice() {
         let label = EchoPriceTagLabelView(x:0, y:0, height:100)
         var result = label.getDividedPrice(price: 10.123)
