@@ -1,0 +1,7 @@
+language: objective-c
+xcode_project: PriceTagLabelExample/PriceTagLabelExample.xcodeproj
+xcode_scheme: PriceTagLabelExample
+osx_image: xcode8.3
+
+script:
+- set -o pipefail && xcodebuild -project PriceTagLabelExample/PriceTagLabelExample.xcodeproj -scheme PriceTagLabelExample -destination 'platform=iOS Simulator,name=iPhone 6 Plus,OS=10.1' build test | xcpretty
