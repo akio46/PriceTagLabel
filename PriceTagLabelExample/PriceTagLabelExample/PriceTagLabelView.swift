@@ -9,16 +9,26 @@
 import Foundation
 import UIKit
 
-enum EchoPriceTagLabelFontMode {
-    case Normal
+enum EchoPriceTagLabelPositionMode {
     case SUPERSCRIPT
     case SUBSCRIPT
     case MIDDLESCRIPT
 }
 
+enum EchoPriceTagLabelFontSizeMode {
+    case Small
+    case Medium
+    case Big
+}
+
 enum EchoLabelPositionType {
     case Left
     case Right
+}
+
+struct EchoPriceTagShowMode {
+    var position: EchoPriceTagLabelPositionMode = .SUPERSCRIPT
+    var size: EchoPriceTagLabelFontSizeMode = .Small
 }
 
 struct EchoPriceLabelSetting {
@@ -32,13 +42,14 @@ struct EchoPriceLabelSetting {
 
 class EchoPriceTagLabelView: UIView {
     
+    // Helvetica is used for the time being
     public let basicFontName = "HelveticaNeue-UltraLight"
     public let italicFontName = "HelveticaNeue-UltraLightItalic"
     public let boldFontName = "HelveticaNeue-Bold"
     public let boldItalicFontName = "HelveticaNeue-BoldItalic"
     
     private var currencyLabel: UILabel?
-    private var integerLabel: UILabel?
+    private var mainPriceLabel: UILabel?
     private var decimalPointLabel: UILabel?
     private var decimalLabel: UILabel?
     private var components: [UILabel?] = []
@@ -50,10 +61,10 @@ class EchoPriceTagLabelView: UIView {
         }
     }
     
-    var integerLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
+    var mainPriceLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
-            setLabelSettings(label: integerLabel,
-                             setting: integerLabelSetting)
+            setLabelSettings(label: mainPriceLabel,
+                             setting: mainPriceLabelSetting)
         }
     }
     
@@ -82,30 +93,27 @@ class EchoPriceTagLabelView: UIView {
     public func setPrice(price: Float,
                          currency: String = "$",
                          decimalPoint: String = ".",
-                         currencyShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT,
-                         decimalPointShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT,
-                         decimalsShowMode: EchoPriceTagLabelFontMode = .SUPERSCRIPT
+                         currencyShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode(),
+                         decimalPointShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode(),
+                         decimalsShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
         ) -> CGFloat {
         
         let dividedPrice = getDividedPrice(price: price)
         
         createMainPriceLabel(mainPrice: dividedPrice.integerPart)
-        frame.size.height = integerLabel!.frame.size.height
-        
         createCurrencyLabel(text: currency, mode: currencyShowMode)
         createDecimalPointLabel(text: decimalPoint, mode: decimalPointShowMode)
         createDecimalLabel(text: String(dividedPrice.decimalPart), mode: decimalsShowMode)
         
         reshape()
         
-//        integerLabel!.layer.addBorder(edge: .bottom, color: UIColor.red, thickness: 1)
-        
         return frame.width
     }
     
     private func reshape() {
+        frame.size.height = mainPriceLabel!.frame.size.height
         components = [currencyLabel,
-                           integerLabel,
+                           mainPriceLabel,
                            decimalPointLabel,
                            decimalLabel]
         let transform = CGAffineTransform(translationX: currencyLabel!.frame.width, y: 0)
@@ -116,11 +124,11 @@ class EchoPriceTagLabelView: UIView {
     }
     
     private func createMainPriceLabel(mainPrice: Int) {
-        integerLabelSetting.text = String(mainPrice)
-        integerLabelSetting.fontSize = frame.size.height
-        integerLabel = createMainPriceLabel(frame: frame, setting: integerLabelSetting)
-        addSubview(integerLabel!)
-        integerLabel!.frame.origin = CGPoint(x: 0, y: 0)
+        mainPriceLabelSetting.text = String(mainPrice)
+        mainPriceLabelSetting.fontSize = frame.size.height
+        mainPriceLabel = createMainPriceLabel(frame: frame, setting: mainPriceLabelSetting)
+        addSubview(mainPriceLabel!)
+        mainPriceLabel!.frame.origin = CGPoint(x: 0, y: 0)
     }
     
     private func createMainPriceLabel(frame: CGRect,
@@ -130,35 +138,38 @@ class EchoPriceTagLabelView: UIView {
         label.sizeToFit()
         removeLabelPadding(label: label)
         
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.brown.cgColor
+        
         return label
     }
     
-    private func createCurrencyLabel(text: String, mode: EchoPriceTagLabelFontMode) {
+    private func createCurrencyLabel(text: String, mode: EchoPriceTagShowMode) {
         currencyLabelSetting.text = text
         currencyLabel = createLabel(positionType: .Left,
                                     heightRatio: smallLabelRatio,
-                                    referLabel: integerLabel!,
+                                    referLabel: mainPriceLabel!,
                                     mode: mode,
                                     setting: currencyLabelSetting)
         addSubview(currencyLabel!)
     }
     
-    private func createDecimalPointLabel(text: String, mode: EchoPriceTagLabelFontMode) {
+    private func createDecimalPointLabel(text: String, mode: EchoPriceTagShowMode) {
         decimalPointLabelSetting.text = text
         decimalPointLabel = createLabel(positionType: .Right,
                                         heightRatio: smallLabelRatio,
-                                        referLabel: integerLabel!,
+                                        referLabel: mainPriceLabel!,
                                         mode: mode,
                                         setting: decimalPointLabelSetting)
         addSubview(decimalPointLabel!)
     }
     
-    private func createDecimalLabel(text: String, mode: EchoPriceTagLabelFontMode) {
+    private func createDecimalLabel(text: String, mode: EchoPriceTagShowMode) {
         let span = decimalPointLabel!.frame.size.width
         decimalLabelSetting.text = text
         decimalLabel = createLabel(positionType: .Right,
                                    heightRatio: smallLabelRatio,
-                                   referLabel: integerLabel!,
+                                   referLabel: mainPriceLabel!,
                                    spanToReferLabel: span,
                                    mode: mode,
                                    setting: decimalLabelSetting)
@@ -187,10 +198,11 @@ class EchoPriceTagLabelView: UIView {
                              heightRatio: CGFloat,
                              referLabel: UILabel,
                              spanToReferLabel: CGFloat = 0,
-                             mode:EchoPriceTagLabelFontMode,
+                             mode:EchoPriceTagShowMode,
                              setting:EchoPriceLabelSetting) -> UILabel{
         let refHeight = referLabel.frame.size.height
-        let height = (mode == .Normal) ? refHeight : smallLabelRatio * refHeight
+        let ratio = getLabelHeightRatio(sizeMode: mode.size)
+        let height = ratio * refHeight
         
         let label = UILabel()
         label.frame = CGRect(x: 0,
@@ -198,7 +210,7 @@ class EchoPriceTagLabelView: UIView {
                              width: CGFloat.greatestFiniteMagnitude,
                              height: height)
         var newSetting = setting
-        newSetting.fontSize = (mode == .Normal) ? referLabel.font.pointSize : height
+        newSetting.fontSize = (mode.size == .Big) ? referLabel.font.pointSize : height
         
         setLabelSettings(label: label, setting: newSetting)
         label.sizeToFit()
@@ -210,29 +222,46 @@ class EchoPriceTagLabelView: UIView {
             label.frame.origin.x = referLabel.frame.maxX + spanToReferLabel
         }
         
-        let refY = getLabelRefY(mode: mode,
+        let refY = getLabelRefY(positionMode: mode.position,
                                 refHeight: refHeight,
                                 labelHeight: height)
         
         label.frame.origin.y = refY
         
-//        label.layer.borderColor = UIColor.red.cgColor
-//        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.blue.cgColor
+        label.layer.borderWidth = 1
         
         return label
     }
     
-    private func getLabelRefY(mode: EchoPriceTagLabelFontMode,
+    private func getLabelHeightRatio(sizeMode: EchoPriceTagLabelFontSizeMode) -> CGFloat {
+        var ratio: CGFloat
+        
+        switch sizeMode {
+        case .Small:
+            ratio = 1.0 / 3
+            break
+        case .Medium:
+            ratio = 2.0 / 3
+            break
+        case .Big:
+            ratio = 1.0
+        }
+        
+        return ratio
+    }
+    
+    private func getLabelRefY(positionMode: EchoPriceTagLabelPositionMode,
                               refHeight: CGFloat,
                               labelHeight:CGFloat) -> CGFloat {
         var refY: CGFloat
 
-        switch mode {
-        case .Normal, .SUPERSCRIPT:
+        switch positionMode {
+        case .SUPERSCRIPT:
             refY = 0
             break
         case .MIDDLESCRIPT:
-            refY = smallLabelRatio * refHeight
+            refY = (refHeight - labelHeight) / 2
             break
         case .SUBSCRIPT:
             refY = refHeight - labelHeight
