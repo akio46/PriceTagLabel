@@ -53,6 +53,23 @@ class EchoPriceTagLabelView: UIView {
     private var decimalPointLabel: UILabel?
     private var decimalLabel: UILabel?
     private var components: [UILabel?] = []
+    private var height: CGFloat = 0
+    private var currency : String = "$"
+    private var decimalPoint: String = "."
+    
+    var price: Float = 0.0 {
+        didSet {
+            if self.superview != nil {
+                let view = self.superview
+                self.removeFromSuperview()
+                _ = self.components.map{$0?.removeFromSuperview()}
+                frame.size.width = UIScreen.main.bounds.width
+                frame.size.height = height
+                _ = setPrice(price: price)
+                view!.addSubview(self)
+            }
+        }
+    }
     
     var currencyLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
@@ -85,6 +102,7 @@ class EchoPriceTagLabelView: UIView {
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
     init(x: CGFloat, y: CGFloat, height: CGFloat) {
+        self.height = height
         super.init(frame:CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
     }
     
@@ -98,12 +116,17 @@ class EchoPriceTagLabelView: UIView {
                          decimalsShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
         ) -> CGFloat {
         
+        self.price = price
+        self.currency = currency
+        self.decimalPoint = decimalPoint
+        
         let dividedPrice = getDividedPrice(price: price)
         
         createMainPriceLabel(mainPrice: dividedPrice.integerPart)
         createCurrencyLabel(text: currency, mode: currencyShowMode)
         createDecimalPointLabel(text: decimalPoint, mode: decimalPointShowMode)
-        createDecimalLabel(text: String(dividedPrice.decimalPart), mode: decimalsShowMode)
+        createDecimalLabel(text: String(format:"%02d", dividedPrice.decimalPart),
+                           mode: decimalsShowMode)
         
         reshape()
         
@@ -138,8 +161,8 @@ class EchoPriceTagLabelView: UIView {
         label.sizeToFit()
         removeLabelPadding(label: label)
         
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.brown.cgColor
+//        label.layer.borderWidth = 1
+//        label.layer.borderColor = UIColor.brown.cgColor
         
         return label
     }
@@ -228,8 +251,8 @@ class EchoPriceTagLabelView: UIView {
         
         label.frame.origin.y = refY
         
-        label.layer.borderColor = UIColor.blue.cgColor
-        label.layer.borderWidth = 1
+//        label.layer.borderColor = UIColor.blue.cgColor
+//        label.layer.borderWidth = 1
         
         return label
     }
