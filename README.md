@@ -25,4 +25,6 @@ To integrate EchoTipCalc into your Xcode project using CocoaPods, specify it in 
 ```ruby
 pod 'EchoPriceTagLabel', '~> 0.0.2'
 ```
+## Usage
 
+Check the demo in the project please.
