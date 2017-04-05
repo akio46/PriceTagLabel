@@ -4,6 +4,14 @@ A label for displaying price tag gracefully.
 
 ![](https://travis-ci.org/guoyingtao/PriceTagLabel.svg?branch=master)
 
+## Demo
+
+> ![Screenshot](https://s6.postimg.org/cpn94ovdp/pricetag1.png)
+> ![Screenshot](https://s6.postimg.org/pv2rasp99/pricetag2.png)
+> ![Screenshot](https://s6.postimg.org/vxezf1331/pricetag3.png)
+
+## Install
+
 ### CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
