@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F904F801E92F09F00F5AF4C /* PriceTagLabelExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F904F7F1E92F09F00F5AF4C /* PriceTagLabelExampleTests.swift */; };
-		5F904FD41E93F49200F5AF4C /* PriceTagLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F904FD31E93F49200F5AF4C /* PriceTagLabelView.swift */; };
+		5F904FDA1E95852800F5AF4C /* PriceTagLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F904FD91E95852800F5AF4C /* PriceTagLabelView.swift */; };
 		5FA301651E8F0079007CF814 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA301641E8F0079007CF814 /* AppDelegate.swift */; };
 		5FA301671E8F0079007CF814 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA301661E8F0079007CF814 /* ViewController.swift */; };
 		5FA3016A1E8F0079007CF814 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FA301681E8F0079007CF814 /* Main.storyboard */; };
@@ -30,7 +30,7 @@
 		5F904F7D1E92F09F00F5AF4C /* PriceTagLabelExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceTagLabelExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F904F7F1E92F09F00F5AF4C /* PriceTagLabelExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTagLabelExampleTests.swift; sourceTree = "<group>"; };
 		5F904F811E92F09F00F5AF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F904FD31E93F49200F5AF4C /* PriceTagLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceTagLabelView.swift; sourceTree = "<group>"; };
+		5F904FD91E95852800F5AF4C /* PriceTagLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriceTagLabelView.swift; path = ../../PriceTagLabel/PriceTagLabelView.swift; sourceTree = "<group>"; };
 		5FA301611E8F0079007CF814 /* PriceTagLabelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceTagLabelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA301641E8F0079007CF814 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FA301661E8F0079007CF814 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		5FA301631E8F0079007CF814 /* PriceTagLabelExample */ = {
 			isa = PBXGroup;
 			children = (
-				5F904FD31E93F49200F5AF4C /* PriceTagLabelView.swift */,
+				5F904FD91E95852800F5AF4C /* PriceTagLabelView.swift */,
 				5FA301641E8F0079007CF814 /* AppDelegate.swift */,
 				5FA301661E8F0079007CF814 /* ViewController.swift */,
 				5FA301681E8F0079007CF814 /* Main.storyboard */,
@@ -213,7 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FA301671E8F0079007CF814 /* ViewController.swift in Sources */,
-				5F904FD41E93F49200F5AF4C /* PriceTagLabelView.swift in Sources */,
+				5F904FDA1E95852800F5AF4C /* PriceTagLabelView.swift in Sources */,
 				5FA301651E8F0079007CF814 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +405,7 @@
 				5F904F861E92F09F00F5AF4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FA3015C1E8F0079007CF814 /* Build configuration list for PBXProject "PriceTagLabelExample" */ = {
 			isa = XCConfigurationList;
