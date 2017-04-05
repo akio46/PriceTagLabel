@@ -9,29 +9,29 @@
 import Foundation
 import UIKit
 
-enum EchoPriceTagLabelPositionMode {
+public enum EchoPriceTagLabelPositionMode {
     case SUPERSCRIPT
     case SUBSCRIPT
     case MIDDLESCRIPT
 }
 
-enum EchoPriceTagLabelFontSizeMode {
+public enum EchoPriceTagLabelFontSizeMode {
     case Small
     case Medium
     case Big
 }
 
-enum EchoLabelPositionType {
+private enum EchoLabelPositionType {
     case Left
     case Right
 }
 
-struct EchoPriceTagShowMode {
+public struct EchoPriceTagShowMode {
     var position: EchoPriceTagLabelPositionMode = .SUPERSCRIPT
     var size: EchoPriceTagLabelFontSizeMode = .Small
 }
 
-struct EchoPriceLabelSetting {
+public struct EchoPriceLabelSetting {
     var color: UIColor = UIColor.black
     var italic = false
     var bold = false
@@ -40,7 +40,7 @@ struct EchoPriceLabelSetting {
     var text: String = ""
 }
 
-class EchoPriceTagLabelView: UIView {
+public class EchoPriceTagLabelView: UIView {
     
     // Helvetica is used for the time being
     public let basicFontName = "HelveticaNeue-UltraLight"
@@ -101,12 +101,12 @@ class EchoPriceTagLabelView: UIView {
     
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
-    init(x: CGFloat, y: CGFloat, height: CGFloat) {
+    public init(x: CGFloat, y: CGFloat, height: CGFloat) {
         self.height = height
         super.init(frame:CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
     }
     
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
+    required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
     
     public func setPrice(price: Float,
                          currency: String = "$",
