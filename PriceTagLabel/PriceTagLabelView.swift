@@ -18,6 +18,7 @@ public enum EchoPriceTagLabelPositionMode {
 public enum EchoPriceTagLabelFontSizeMode {
     case Small
     case Medium
+    case Half
     case Big
 }
 
@@ -135,10 +136,17 @@ public class EchoPriceTagLabelView: UIView {
     
     private func reshape() {
         frame.size.height = mainPriceLabel!.frame.size.height
-        components = [currencyLabel,
-                           mainPriceLabel,
-                           decimalPointLabel,
-                           decimalLabel]
+        if decimalPointLabel == nil {
+            components = [currencyLabel,
+                          mainPriceLabel,
+                          decimalLabel]
+        } else {
+            components = [currencyLabel,
+                          mainPriceLabel,
+                          decimalPointLabel,
+                          decimalLabel]
+        }
+        
         let transform = CGAffineTransform(translationX: currencyLabel!.frame.width, y: 0)
         _ = components.map{$0!.transform = transform}
         
@@ -178,6 +186,10 @@ public class EchoPriceTagLabelView: UIView {
     }
     
     private func createDecimalPointLabel(text: String, mode: EchoPriceTagShowMode) {
+        guard !text.isEmpty else {
+            return
+        }
+        
         decimalPointLabelSetting.text = text
         decimalPointLabel = createLabel(positionType: .Right,
                                         heightRatio: smallLabelRatio,
@@ -188,7 +200,7 @@ public class EchoPriceTagLabelView: UIView {
     }
     
     private func createDecimalLabel(text: String, mode: EchoPriceTagShowMode) {
-        let span = decimalPointLabel!.frame.size.width
+        let span = decimalPointLabelSetting.text.isEmpty ? 0 : decimalPointLabel!.frame.size.width
         decimalLabelSetting.text = text
         decimalLabel = createLabel(positionType: .Right,
                                    heightRatio: smallLabelRatio,
@@ -266,6 +278,9 @@ public class EchoPriceTagLabelView: UIView {
             break
         case .Medium:
             ratio = 2.0 / 3
+            break
+        case .Half:
+            ratio = 1.0 / 2
             break
         case .Big:
             ratio = 1.0
