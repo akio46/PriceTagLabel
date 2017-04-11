@@ -10,6 +10,10 @@ A label for displaying price tag gracefully.
 > ![Screenshot](https://s6.postimg.org/pv2rasp99/pricetag2.png)
 > ![Screenshot](https://s6.postimg.org/vxezf1331/pricetag3.png)
 
+## Requirements
+* iOS 8.0+
+* Swift 3.0
+
 ## Install
 
 ### CocoaPods
