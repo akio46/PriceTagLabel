@@ -58,7 +58,7 @@ public class EchoPriceTagLabelView: UIView {
     private var currency : String = "$"
     private var decimalPoint: String = "."
     
-    var price: Float = 0.0 {
+    public var price: Float = 0.0 {
         didSet {
             if self.superview != nil {
                 let view = self.superview
