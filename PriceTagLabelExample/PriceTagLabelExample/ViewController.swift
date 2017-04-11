@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         let tagView2 = EchoPriceTagLabelView(x: 50,
                                              y: 440,
                                              height: lableHeight,
-                                             fitableDigits: 2)
+                                             bestDisplayDigits: 2)
         let width = tagView2.setPrice(price: 123028.07,
                                       decimalPoint: "",
                                       currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half))

@@ -58,7 +58,7 @@ public class EchoPriceTagLabelView: UIView {
     private var currency : String = "$"
     private var decimalPoint: String = "."
     
-    public var fitableDigits: Int = 2
+    public var bestDisplayDigits: Int = 2
     
     public var price: Float = 0.0 {
         didSet {
@@ -104,9 +104,9 @@ public class EchoPriceTagLabelView: UIView {
     
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
-    public init(x: CGFloat, y: CGFloat, height: CGFloat, fitableDigits: Int = 0) {
+    public init(x: CGFloat, y: CGFloat, height: CGFloat, bestDisplayDigits: Int = 0) {
         self.height = height
-        self.fitableDigits = fitableDigits
+        self.bestDisplayDigits = bestDisplayDigits
         super.init(frame:CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
     }
     
@@ -164,7 +164,7 @@ public class EchoPriceTagLabelView: UIView {
         addSubview(mainPriceLabel!)
         mainPriceLabel!.frame.origin = CGPoint(x: 0, y: 0)
         
-        if self.fitableDigits > 0 {
+        if self.bestDisplayDigits > 0 {
             let scale = getFitableWidth() / mainPriceLabel!.frame.width
             let oldX = mainPriceLabel!.frame.minX
             mainPriceLabel!.transform = CGAffineTransform(scaleX: scale, y: 1)
@@ -378,7 +378,7 @@ public class EchoPriceTagLabelView: UIView {
     }
     
     public func getFitableWidth() -> CGFloat {
-        let dividedPrice = getDividedPrice(price: Float(10^fitableDigits / 10))
+        let dividedPrice = getDividedPrice(price: Float(10^bestDisplayDigits / 10))
         var setting = mainPriceLabelSetting
         setting.text = String(dividedPrice.integerPart)
         setting.fontSize = frame.size.height
