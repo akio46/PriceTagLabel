@@ -58,6 +58,8 @@ public class EchoPriceTagLabelView: UIView {
     private var currency : String = "$"
     private var decimalPoint: String = "."
     
+    public var fitableDigits: Int = 2
+    
     public var price: Float = 0.0 {
         didSet {
             if self.superview != nil {
@@ -102,8 +104,9 @@ public class EchoPriceTagLabelView: UIView {
     
     private let smallLabelRatio = CGFloat(1.0 / 3)
     
-    public init(x: CGFloat, y: CGFloat, height: CGFloat) {
+    public init(x: CGFloat, y: CGFloat, height: CGFloat, fitableDigits: Int = 0) {
         self.height = height
+        self.fitableDigits = fitableDigits
         super.init(frame:CGRect(x: x, y: y, width: UIScreen.main.bounds.width, height: height))
     }
     
@@ -138,17 +141,17 @@ public class EchoPriceTagLabelView: UIView {
         frame.size.height = mainPriceLabel!.frame.size.height
         if decimalPointLabel == nil {
             components = [currencyLabel,
-                          mainPriceLabel,
                           decimalLabel]
         } else {
             components = [currencyLabel,
-                          mainPriceLabel,
                           decimalPointLabel,
                           decimalLabel]
         }
         
         let transform = CGAffineTransform(translationX: currencyLabel!.frame.width, y: 0)
         _ = components.map{$0!.transform = transform}
+        
+        mainPriceLabel!.frame.origin.x += currencyLabel!.frame.width
         
         let totalWidth = components.reduce(0){$0 + $1!.frame.size.width}
         frame.size.width = totalWidth
@@ -160,6 +163,13 @@ public class EchoPriceTagLabelView: UIView {
         mainPriceLabel = createMainPriceLabel(frame: frame, setting: mainPriceLabelSetting)
         addSubview(mainPriceLabel!)
         mainPriceLabel!.frame.origin = CGPoint(x: 0, y: 0)
+        
+        if self.fitableDigits > 0 {
+            let scale = getFitableWidth() / mainPriceLabel!.frame.width
+            let oldX = mainPriceLabel!.frame.minX
+            mainPriceLabel!.transform = CGAffineTransform(scaleX: scale, y: 1)
+            mainPriceLabel!.frame.origin.x = oldX
+        }
     }
     
     private func createMainPriceLabel(frame: CGRect,
@@ -365,6 +375,15 @@ public class EchoPriceTagLabelView: UIView {
         let roundedPrice = (price * 100).rounded() / 100
         let priceParts = String(format:"%.2f", roundedPrice).components(separatedBy: ".")
         return (Int(priceParts[0])!, Int(priceParts[1])!)
+    }
+    
+    public func getFitableWidth() -> CGFloat {
+        let dividedPrice = getDividedPrice(price: Float(10^fitableDigits / 10))
+        var setting = mainPriceLabelSetting
+        setting.text = String(dividedPrice.integerPart)
+        setting.fontSize = frame.size.height
+        let label = createMainPriceLabel(frame: self.frame, setting: setting)
+        return label.frame.width
     }
 }
 

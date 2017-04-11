@@ -47,8 +47,11 @@ class ViewController: UIViewController {
 //        tagView1.layer.borderColor = UIColor.red.cgColor
 //        tagView1.layer.borderWidth = 1
         
-        let tagView2 = EchoPriceTagLabelView(x: 50, y: 440, height: lableHeight)
-        let width = tagView2.setPrice(price: 108.07,
+        let tagView2 = EchoPriceTagLabelView(x: 50,
+                                             y: 440,
+                                             height: lableHeight,
+                                             fitableDigits: 2)
+        let width = tagView2.setPrice(price: 123028.07,
                                       decimalPoint: "",
                                       currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half))
 
