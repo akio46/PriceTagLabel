@@ -66,6 +66,8 @@ public class EchoPriceTagLabelView: UIView {
                 let view = self.superview
                 self.removeFromSuperview()
                 _ = self.components.map{$0?.removeFromSuperview()}
+                mainPriceLabel?.removeFromSuperview()
+                
                 frame.size.width = UIScreen.main.bounds.width
                 frame.size.height = height
                 _ = setPrice(price: price)
@@ -164,7 +166,7 @@ public class EchoPriceTagLabelView: UIView {
         addSubview(mainPriceLabel!)
         mainPriceLabel!.frame.origin = CGPoint(x: 0, y: 0)
         
-        if self.bestDisplayDigits > 0 {
+        if self.bestDisplayDigits > 0 && mainPrice > 9 {
             let scale = getFitableWidth() / mainPriceLabel!.frame.width
             let oldX = mainPriceLabel!.frame.minX
             mainPriceLabel!.transform = CGAffineTransform(scaleX: scale, y: 1)

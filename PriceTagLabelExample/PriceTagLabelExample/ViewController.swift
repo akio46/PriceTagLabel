@@ -16,8 +16,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let lableHeight: CGFloat = 100
-        tagView = EchoPriceTagLabelView(x: 50, y: 40, height: lableHeight)
-        _ = tagView?.setPrice(price: 8.01,
+        tagView = EchoPriceTagLabelView(x: 50,
+                                        y: 40,
+                                        height: lableHeight,
+                                        bestDisplayDigits: 2)
+        _ = tagView?.setPrice(price: 108.01,
                              currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
         tagView?.currencyLabelSetting = EchoPriceLabelSetting(color: UIColor.red,
                                                              italic: true,
@@ -39,7 +42,7 @@ class ViewController: UIViewController {
                                                             text: "")
         
         let tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
-        _ = tagView1.setPrice(price: 90.01,
+        _ = tagView1.setPrice(price: 99.01,
         currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Medium),
         decimalPointShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big),
         decimalsShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big))
@@ -51,7 +54,7 @@ class ViewController: UIViewController {
                                              y: 440,
                                              height: lableHeight,
                                              bestDisplayDigits: 2)
-        let width = tagView2.setPrice(price: 123028.07,
+        let width = tagView2.setPrice(price: 8.07,
                                       decimalPoint: "",
                                       currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half))
 
