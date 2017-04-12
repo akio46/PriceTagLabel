@@ -9,6 +9,7 @@ A label for displaying price tag gracefully.
 > ![Screenshot](https://s6.postimg.org/cpn94ovdp/pricetag1.png)
 > ![Screenshot](https://s6.postimg.org/pv2rasp99/pricetag2.png)
 > ![Screenshot](https://s6.postimg.org/vxezf1331/pricetag3.png)
+> ![Screenshot](https://s6.postimg.org/mxvim1u5d/pricetag04.png)
 
 ## Requirements
 * iOS 8.0+
