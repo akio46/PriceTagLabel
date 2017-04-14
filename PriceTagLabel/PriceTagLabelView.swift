@@ -76,28 +76,37 @@ public class EchoPriceTagLabelView: UIView {
         }
     }
     
-    var currencyLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
+    public var textColor: UIColor? {
+        didSet {
+            currencyLabelSetting.color = textColor!
+            mainPriceLabelSetting.color = textColor!
+            decimalPointLabelSetting.color = textColor!
+            decimalLabelSetting.color = textColor!
+        }
+    }
+    
+    public var currencyLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
             setLabelSettings(label: currencyLabel,
                              setting: currencyLabelSetting)
         }
     }
     
-    var mainPriceLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
+    public var mainPriceLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
             setLabelSettings(label: mainPriceLabel,
                              setting: mainPriceLabelSetting)
         }
     }
     
-    var decimalPointLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
+    public var decimalPointLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
             setLabelSettings(label: decimalPointLabel,
                              setting: decimalPointLabelSetting)
         }
     }
     
-    var decimalLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
+    public var decimalLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
             setLabelSettings(label: decimalLabel,
                              setting: decimalLabelSetting)
@@ -180,9 +189,6 @@ public class EchoPriceTagLabelView: UIView {
         setLabelSettings(label: label, setting: setting)
         label.sizeToFit()
         removeLabelPadding(label: label)
-        
-//        label.layer.borderWidth = 1
-//        label.layer.borderColor = UIColor.brown.cgColor
         
         return label
     }
@@ -274,9 +280,6 @@ public class EchoPriceTagLabelView: UIView {
                                 labelHeight: height)
         
         label.frame.origin.y = refY
-        
-//        label.layer.borderColor = UIColor.blue.cgColor
-//        label.layer.borderWidth = 1
         
         return label
     }

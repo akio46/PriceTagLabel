@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     private var tagView:EchoPriceTagLabelView?
+    private var tagView1:EchoPriceTagLabelView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +42,12 @@ class ViewController: UIViewController {
                                                             fontSize: 0.0,
                                                             text: "")
         
-        let tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
-        _ = tagView1.setPrice(price: 99.01,
+        tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
+        _ = tagView1?.setPrice(price: 99.01,
         currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Medium),
         decimalPointShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big),
         decimalsShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big))
-        
-//        tagView1.layer.borderColor = UIColor.red.cgColor
-//        tagView1.layer.borderWidth = 1
+        tagView1?.textColor = .blue
         
         let tagView2 = EchoPriceTagLabelView(x: 50,
                                              y: 440,
@@ -61,7 +60,7 @@ class ViewController: UIViewController {
         debugPrint(width)
                 
         self.view.addSubview(tagView!)
-        self.view.addSubview(tagView1)
+        self.view.addSubview(tagView1!)
         self.view.addSubview(tagView2)
     }
 
@@ -78,6 +77,7 @@ class ViewController: UIViewController {
         }
         
         tagView?.price += 1
+        tagView1?.price += 1
     }
     
     @IBAction func addZeroPointOne(_ sender: Any) {
@@ -86,6 +86,7 @@ class ViewController: UIViewController {
         }
         
         tagView?.price += 0.1
+        tagView1?.price += 0.1
     }
 }
 
