@@ -70,7 +70,7 @@ public class EchoPriceTagLabelView: UIView {
                 
                 frame.size.width = UIScreen.main.bounds.width
                 frame.size.height = height
-                _ = setPrice(price: price)
+                _ = setPrice(price: price, currency: currency, decimalPoint: decimalPoint)
                 view!.addSubview(self)
             }
         }

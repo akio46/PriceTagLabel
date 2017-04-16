@@ -22,7 +22,8 @@ class ViewController: UIViewController {
                                         height: lableHeight,
                                         bestDisplayDigits: 2)
         _ = tagView?.setPrice(price: 108.01,
-                             currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
+                              decimalPoint: "",
+                              currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
         tagView?.currencyLabelSetting = EchoPriceLabelSetting(color: UIColor.red,
                                                              italic: true,
                                                              bold: true,
