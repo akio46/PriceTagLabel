@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name         = "EchoPriceTagLabel"
-  s.version      = "0.0.14"
+  s.version      = "0.0.15"
   s.summary      = "A label for displaying price tag gracefully."
 
   s.description  = <<-DESC
