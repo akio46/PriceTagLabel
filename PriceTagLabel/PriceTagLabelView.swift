@@ -162,10 +162,13 @@ public class EchoPriceTagLabelView: UIView {
         let transform = CGAffineTransform(translationX: currencyLabel!.frame.width, y: 0)
         _ = components.map{$0!.transform = transform}
         
-        mainPriceLabel!.frame.origin.x += currencyLabel!.frame.width
+        mainPriceLabel?.frame.origin.x += currencyLabel!.frame.width
         
-        let totalWidth = components.reduce(0){$0 + $1!.frame.size.width}
+        let totalWidth = components.reduce(0){$0 + $1!.frame.size.width} + (mainPriceLabel?.frame.width)!
         frame.size.width = totalWidth
+        
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.blue.cgColor
     }
     
     private func createMainPriceLabel(mainPrice: Int) {
