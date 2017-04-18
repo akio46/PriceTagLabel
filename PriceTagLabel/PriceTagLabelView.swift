@@ -167,8 +167,8 @@ public class EchoPriceTagLabelView: UIView {
         let totalWidth = components.reduce(0){$0 + $1!.frame.size.width} + (mainPriceLabel?.frame.width)!
         frame.size.width = totalWidth
         
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.blue.cgColor
+//        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.blue.cgColor
     }
     
     private func createMainPriceLabel(mainPrice: Int) {
