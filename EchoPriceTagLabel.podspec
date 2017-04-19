@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name         = "EchoPriceTagLabel"
-  s.version      = "0.0.15"
+  s.version      = "0.0.16"
   s.summary      = "A label for displaying price tag gracefully."
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ s.name         = "EchoPriceTagLabel"
   s.author             = { "Yingtao Guo" => "guoyingtao@outlook.com" }
   s.social_media_url   = "http://twitter.com/guoyingtao"
   s.platform     = :ios
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '8.0'
   s.source       = { :git => "https://github.com/guoyingtao/PriceTagLabel.git", :tag => "#{s.version}" }
   s.source_files  = "PriceTagLabel/*"
 
