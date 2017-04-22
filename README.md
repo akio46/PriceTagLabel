@@ -28,7 +28,7 @@ $ gem install cocoapods
 To integrate EchoTipCalc into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'EchoPriceTagLabel', '~> 0.0.16'
+pod 'EchoPriceTagLabel', '~> 0.0.17'
 ```
 ## Usage
 

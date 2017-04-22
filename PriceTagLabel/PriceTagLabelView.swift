@@ -30,15 +30,35 @@ private enum EchoLabelPositionType {
 public struct EchoPriceTagShowMode {
     var position: EchoPriceTagLabelPositionMode = .SUPERSCRIPT
     var size: EchoPriceTagLabelFontSizeMode = .Small
+    
+    public init(position: EchoPriceTagLabelPositionMode = .SUPERSCRIPT,
+                size: EchoPriceTagLabelFontSizeMode = .Small) {
+        self.position = position
+        self.size = size
+    }
 }
 
 public struct EchoPriceLabelSetting {
-    var color: UIColor = UIColor.black
+    var color: UIColor = .black
     var italic = false
     var bold = false
     var underline = false
-    var fontSize: CGFloat = 0.0
+    var fontSize: CGFloat = 12.0
     var text: String = ""
+    
+    public init(color: UIColor = .black,
+                italic: Bool = false,
+                bold: Bool = false,
+                underline: Bool = false,
+                fontSize: CGFloat = 12.0,
+                text: String = "") {
+        self.color = color
+        self.italic = italic
+        self.bold = bold
+        self.underline = underline
+        self.fontSize = fontSize
+        self.text = text
+    }
 }
 
 public class EchoPriceTagLabelView: UIView {
