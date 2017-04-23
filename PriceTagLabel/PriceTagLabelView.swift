@@ -77,6 +77,9 @@ public class EchoPriceTagLabelView: UIView {
     private var height: CGFloat = 0
     private var currency : String = "$"
     private var decimalPoint: String = "."
+    private var currencyShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
+    private var decimalPointShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
+    private var decimalShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
     
     public var bestDisplayDigits: Int = 2
     
@@ -88,7 +91,12 @@ public class EchoPriceTagLabelView: UIView {
                 
                 frame.size.width = UIScreen.main.bounds.width
                 frame.size.height = height
-                _ = setPrice(price: price, currency: currency, decimalPoint: decimalPoint)
+                _ = setPrice(price: price,
+                             currency: currency,
+                             decimalPoint: decimalPoint,
+                             currencyShowMode: self.currencyShowMode,
+                             decimalPointShowMode: self.decimalPointShowMode,
+                             decimalShowMode: self.decimalShowMode)
                 view!.addSubview(self)
             }
         }
@@ -146,12 +154,15 @@ public class EchoPriceTagLabelView: UIView {
                          decimalPoint: String = ".",
                          currencyShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode(),
                          decimalPointShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode(),
-                         decimalsShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
+                         decimalShowMode: EchoPriceTagShowMode = EchoPriceTagShowMode()
         ) -> CGFloat {
         
         self.price = price
         self.currency = currency
         self.decimalPoint = decimalPoint
+        self.currencyShowMode = currencyShowMode
+        self.decimalPointShowMode = decimalPointShowMode
+        self.decimalShowMode = decimalShowMode
         
         let dividedPrice = getDividedPrice(price: price)
         
@@ -159,7 +170,7 @@ public class EchoPriceTagLabelView: UIView {
         createCurrencyLabel(text: currency, mode: currencyShowMode)
         createDecimalPointLabel(text: decimalPoint, mode: decimalPointShowMode)
         createDecimalLabel(text: String(format:"%02d", dividedPrice.decimalPart),
-                           mode: decimalsShowMode)
+                           mode: decimalShowMode)
         
         reshape()
         

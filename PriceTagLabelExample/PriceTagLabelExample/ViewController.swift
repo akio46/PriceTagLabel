@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         _ = tagView?.setPrice(price: 108.01,
                               decimalPoint: "",
                               currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small),
-                              decimalsShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Half))
+                              decimalShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Medium))
         tagView?.currencyLabelSetting = EchoPriceLabelSetting(color: UIColor.red,
                                                              italic: true,
                                                              bold: true,
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
                                decimalPoint: "",
         currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Medium),
         decimalPointShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big),
-        decimalsShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
+        decimalShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
         tagView1?.textColor = .blue
         
         let tagView2 = EchoPriceTagLabelView(x: 50,
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         _ = tagView2.setPrice(price: 8.07,
                                       decimalPoint: "",
                                       currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half),
-                                      decimalsShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Medium))
+                                      decimalShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Medium))
 
         self.view.addSubview(tagView!)
         self.view.addSubview(tagView1!)
