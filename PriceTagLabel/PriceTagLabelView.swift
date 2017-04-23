@@ -84,9 +84,7 @@ public class EchoPriceTagLabelView: UIView {
         didSet {
             if self.superview != nil {
                 let view = self.superview
-                self.removeFromSuperview()
-                _ = self.components.map{$0?.removeFromSuperview()}
-                mainPriceLabel?.removeFromSuperview()
+                clear()
                 
                 frame.size.width = UIScreen.main.bounds.width
                 frame.size.height = height
@@ -168,6 +166,12 @@ public class EchoPriceTagLabelView: UIView {
         return frame.width
     }
     
+    private func clear() {
+        self.removeFromSuperview()
+        _ = self.components.map{$0?.removeFromSuperview()}
+        mainPriceLabel?.removeFromSuperview()
+    }
+    
     private func reshape() {
         frame.size.height = mainPriceLabel!.frame.size.height
         if decimalPointLabel == nil {
@@ -223,6 +227,7 @@ public class EchoPriceTagLabelView: UIView {
                                     referLabel: mainPriceLabel!,
                                     mode: mode,
                                     setting: currencyLabelSetting)
+        currencyLabelSetting.fontSize = currencyLabel!.font.pointSize
         addSubview(currencyLabel!)
     }
     
@@ -237,6 +242,7 @@ public class EchoPriceTagLabelView: UIView {
                                         referLabel: mainPriceLabel!,
                                         mode: mode,
                                         setting: decimalPointLabelSetting)
+        decimalPointLabelSetting.fontSize = decimalPointLabel!.font.pointSize
         addSubview(decimalPointLabel!)
     }
     
@@ -249,6 +255,7 @@ public class EchoPriceTagLabelView: UIView {
                                    spanToReferLabel: span,
                                    mode: mode,
                                    setting: decimalLabelSetting)
+        decimalLabelSetting.fontSize = decimalLabel!.font.pointSize
         addSubview(decimalLabel!)
     }
     

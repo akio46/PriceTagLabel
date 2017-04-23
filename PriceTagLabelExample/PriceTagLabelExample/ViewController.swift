@@ -23,7 +23,8 @@ class ViewController: UIViewController {
                                         bestDisplayDigits: 2)
         _ = tagView?.setPrice(price: 108.01,
                               decimalPoint: "",
-                              currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
+                              currencyShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small),
+                              decimalsShowMode:EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Half))
         tagView?.currencyLabelSetting = EchoPriceLabelSetting(color: UIColor.red,
                                                              italic: true,
                                                              bold: true,
@@ -43,23 +44,26 @@ class ViewController: UIViewController {
                                                             fontSize: 0.0,
                                                             text: "")
         
-        tagView1 = EchoPriceTagLabelView(x: 50, y: 240, height: lableHeight)
+        tagView1 = EchoPriceTagLabelView(x: 50,
+                                         y: 240,
+                                         height: lableHeight,
+                                         bestDisplayDigits: 2)
         _ = tagView1?.setPrice(price: 99.01,
+                               decimalPoint: "",
         currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Medium),
         decimalPointShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big),
-        decimalsShowMode: EchoPriceTagShowMode(position: .SUBSCRIPT, size: .Big))
+        decimalsShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Small))
         tagView1?.textColor = .blue
         
         let tagView2 = EchoPriceTagLabelView(x: 50,
                                              y: 440,
                                              height: lableHeight,
                                              bestDisplayDigits: 2)
-        let width = tagView2.setPrice(price: 8.07,
+        _ = tagView2.setPrice(price: 8.07,
                                       decimalPoint: "",
-                                      currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half))
+                                      currencyShowMode: EchoPriceTagShowMode(position: .MIDDLESCRIPT, size: .Half),
+                                      decimalsShowMode: EchoPriceTagShowMode(position: .SUPERSCRIPT, size: .Medium))
 
-        debugPrint(width)
-                
         self.view.addSubview(tagView!)
         self.view.addSubview(tagView1!)
         self.view.addSubview(tagView2)
