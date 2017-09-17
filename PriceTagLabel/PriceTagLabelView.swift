@@ -211,12 +211,12 @@ public class EchoPriceTagLabelView: UIView {
         let totalWidth = components.reduce(0){$0 + $1!.frame.size.width} + (mainPriceLabel?.frame.width)!
         frame.size.width = totalWidth
         
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.blue.cgColor
+        //        self.layer.borderWidth = 1
+        //        self.layer.borderColor = UIColor.blue.cgColor
     }
     
     private func createMainPriceLabel(mainPrice: Int) {
-        mainPriceLabelSetting.text = String(mainPrice)
+        mainPriceLabelSetting.text = String(mainPrice.formattedWithSeparator)
         mainPriceLabelSetting.fontSize = frame.size.height
         mainPriceLabel = createMainPriceLabel(frame: frame, setting: mainPriceLabelSetting)
         addSubview(mainPriceLabel!)
@@ -284,17 +284,17 @@ public class EchoPriceTagLabelView: UIView {
                                             fontSize: CGFloat,
                                             color: UIColor = UIColor.black)
         -> NSAttributedString {
-        let myAttribute = [ NSForegroundColorAttributeName: color,
-                            NSFontAttributeName: UIFont(name: fontName, size: fontSize)!] as [String : Any]
-        let attrString = NSMutableAttributedString(string: text, attributes: myAttribute)
-        
-//        if underline {
-//            attrString.addAttribute(NSUnderlineStyleAttributeName,
-//                                    value: NSUnderlineStyle.styleSingle.rawValue,
-//                                    range: (attrString.string as NSString).range(of: text))
-//        }
-        
-        return attrString
+            let myAttribute = [ NSForegroundColorAttributeName: color,
+                                NSFontAttributeName: UIFont(name: fontName, size: fontSize)!] as [String : Any]
+            let attrString = NSMutableAttributedString(string: text, attributes: myAttribute)
+            
+            //        if underline {
+            //            attrString.addAttribute(NSUnderlineStyleAttributeName,
+            //                                    value: NSUnderlineStyle.styleSingle.rawValue,
+            //                                    range: (attrString.string as NSString).range(of: text))
+            //        }
+            
+            return attrString
     }
     
     private func createLabel(positionType: EchoLabelPositionType,
@@ -358,7 +358,7 @@ public class EchoPriceTagLabelView: UIView {
                               refHeight: CGFloat,
                               labelHeight:CGFloat) -> CGFloat {
         var refY: CGFloat
-
+        
         switch positionMode {
         case .SUPERSCRIPT:
             refY = 0
@@ -389,7 +389,7 @@ public class EchoPriceTagLabelView: UIView {
         guard text != nil else {
             return
         }
-
+        
         let fontName = getFontName(italic: setting!.italic,
                                    bold: setting!.bold)
         let fontSize = (setting?.fontSize == 0) ? (label!.font.pointSize) : setting!.fontSize
@@ -468,5 +468,20 @@ extension CALayer {
         border.backgroundColor = color.cgColor;
         
         self.addSublayer(border)
+    }
+}
+
+extension Formatter {
+    static let withSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+}
+
+extension Integer {
+    var formattedWithSeparator: String {
+        return Formatter.withSeparator.string(for: self) ?? ""
     }
 }
