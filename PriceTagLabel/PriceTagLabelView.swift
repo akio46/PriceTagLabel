@@ -111,6 +111,15 @@ public class EchoPriceTagLabelView: UIView {
         }
     }
     
+    public var isBold : Bool? {
+        didSet {
+            currencyLabelSetting.bold = isBold
+            mainPriceLabelSetting.bold = isBold
+            decimalPointLabelSetting.bold = isBold
+            decimalLabelSetting.bold = isBold
+        }
+    }
+    
     public var currencyLabelSetting: EchoPriceLabelSetting = EchoPriceLabelSetting() {
         didSet {
             setLabelSettings(label: currencyLabel,
