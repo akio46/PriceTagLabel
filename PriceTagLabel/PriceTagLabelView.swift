@@ -216,7 +216,7 @@ public class EchoPriceTagLabelView: UIView {
     }
     
     private func createMainPriceLabel(mainPrice: Int) {
-        mainPriceLabelSetting.text = String(mainPrice.formattedWithSeparator)
+        mainPriceLabelSetting.text = mainPrice.formattedWithSeparator
         mainPriceLabelSetting.fontSize = frame.size.height
         mainPriceLabel = createMainPriceLabel(frame: frame, setting: mainPriceLabelSetting)
         addSubview(mainPriceLabel!)
