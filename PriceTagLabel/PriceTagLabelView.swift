@@ -64,8 +64,8 @@ public struct EchoPriceLabelSetting {
 public class EchoPriceTagLabelView: UIView {
     
     // Helvetica is used for the time being
-    public let basicFontName = "HelveticaNeue-UltraLight"
-    public let italicFontName = "HelveticaNeue-UltraLightItalic"
+    public let basicFontName = "HelveticaNeue-Light"
+    public let italicFontName = "HelveticaNeue-LightItalic"
     public let boldFontName = "HelveticaNeue-Bold"
     public let boldItalicFontName = "HelveticaNeue-BoldItalic"
     
